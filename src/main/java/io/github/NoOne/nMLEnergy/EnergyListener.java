@@ -1,14 +1,12 @@
-package io.github.NoOne.nMLEnergySystem;
+package io.github.NoOne.nMLEnergy;
 
 import io.github.NoOne.nMLPlayerStats.profileSystem.ProfileManager;
 import io.github.NoOne.nMLPlayerStats.statSystem.ResetStatsEvent;
 import io.github.NoOne.nMLPlayerStats.statSystem.StatChangeEvent;
 import io.github.NoOne.nMLPlayerStats.statSystem.Stats;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -16,8 +14,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class EnergyListener implements Listener {
     private ProfileManager profileManager;
 
-    public EnergyListener(NMLEnergySystem nmlEnergySystem) {
-        this.profileManager = nmlEnergySystem.getProfileManager();
+    public EnergyListener(NMLEnergy nmlEnergy) {
+        this.profileManager = nmlEnergy.getProfileManager();
     }
 
     @EventHandler

@@ -1,4 +1,4 @@
-package io.github.NoOne.nMLEnergySystem;
+package io.github.NoOne.nMLEnergy;
 
 import io.github.NoOne.nMLPlayerStats.profileSystem.ProfileManager;
 import io.github.NoOne.nMLPlayerStats.statSystem.StatChangeEvent;
@@ -10,13 +10,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 
 public class EnergyManager {
-    private static NMLEnergySystem nmlEnergySystem;
+    private static NMLEnergy nmlEnergy;
     private static ProfileManager profileManager;
     private static final ArrayList<UUID> ongoingEnergyPauses = new ArrayList<>();
 
-    public EnergyManager(NMLEnergySystem nmlEnergySystem) {
-        this.nmlEnergySystem = nmlEnergySystem;
-        profileManager = nmlEnergySystem.getProfileManager();
+    public EnergyManager(NMLEnergy nmlEnergy) {
+        this.nmlEnergy = nmlEnergy;
+        profileManager = nmlEnergy.getProfileManager();
     }
 
     public void startEnergyRegenTask() {
@@ -39,7 +39,7 @@ public class EnergyManager {
                     }
                 }
             }
-        }.runTaskTimer(nmlEnergySystem, 0, 20);
+        }.runTaskTimer(nmlEnergy, 0, 20);
     }
 
     public static void addEnergy(Player player, double amount) {

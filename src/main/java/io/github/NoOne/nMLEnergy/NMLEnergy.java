@@ -1,10 +1,10 @@
-package io.github.NoOne.nMLEnergySystem;
+package io.github.NoOne.nMLEnergy;
 
 import io.github.NoOne.nMLPlayerStats.NMLPlayerStats;
 import io.github.NoOne.nMLPlayerStats.profileSystem.ProfileManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class NMLEnergySystem extends JavaPlugin {
+public final class NMLEnergy extends JavaPlugin {
     private ProfileManager profileManager;
 
     @Override

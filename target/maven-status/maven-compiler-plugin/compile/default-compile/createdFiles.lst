@@ -1,4 +1,4 @@
-io\github\NoOne\nMLEnergySystem\EnergyListener.class
-io\github\NoOne\nMLEnergySystem\EnergyManager$1.class
-io\github\NoOne\nMLEnergySystem\NMLEnergySystem.class
-io\github\NoOne\nMLEnergySystem\EnergyManager.class
+io\github\NoOne\nMLEnergy\NMLEnergy.class
+io\github\NoOne\nMLEnergy\EnergyManager.class
+io\github\NoOne\nMLEnergy\EnergyListener.class
+io\github\NoOne\nMLEnergy\EnergyManager$1.class
