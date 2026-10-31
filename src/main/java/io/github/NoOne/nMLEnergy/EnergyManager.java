@@ -12,7 +12,7 @@ import java.util.*;
 public class EnergyManager {
     private static NMLEnergy nmlEnergy;
     private static ProfileManager profileManager;
-    private static final ArrayList<UUID> ongoingEnergyPauses = new ArrayList<>();
+    private static final ArrayList<UUID> ongoingEnergyPauses = new ArrayList<>(); // players that have their energy regen paused
 
     public EnergyManager(NMLEnergy nmlEnergy) {
         this.nmlEnergy = nmlEnergy;
@@ -25,8 +25,7 @@ public class EnergyManager {
                 for (Player player : Bukkit.getOnlinePlayers()) {
 
                     // energy cannot be added if either their energy regen is paused, or they're sprinting in survival or adv. mode
-                    if ((player.isSprinting() && player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE) ||
-                        ongoingEnergyPauses.contains(player.getUniqueId())) {
+                    if ((player.isSprinting() && player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE) || ongoingEnergyPauses.contains(player.getUniqueId())) {
                         continue;
                     }
 
@@ -69,6 +68,6 @@ public class EnergyManager {
     }
 
     public static boolean canHaveEnergyRemoved(Player player) {
-        return (player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE) && !ongoingEnergyPauses.contains(player.getUniqueId());
+        return player.getGameMode() == GameMode.SURVIVAL || player.getGameMode() == GameMode.ADVENTURE;
     }
 }
