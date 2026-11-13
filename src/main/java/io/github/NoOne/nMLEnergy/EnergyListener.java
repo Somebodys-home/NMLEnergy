@@ -23,11 +23,11 @@ public class EnergyListener implements Listener {
     @EventHandler (priority = EventPriority.MONITOR) // since this is the thing that updates the stat internally, it should be on monitor
     public void onEnergyStatChange(StatChangeEvent event) {
         Player player = event.getPlayer();
-        PlayerStat playerStat = event.getPlayerStat();
+        PlayerStat stat = event.getStat();
 
-        if (playerStat == PlayerStat.CURRENT_ENERGY) { // update the hunger bar when updating current energy
+        if (stat == PlayerStat.CURRENT_ENERGY) { // update the hunger bar when updating current energy
             EnergyManager.updateEnergyBar(player);
-        } else if (playerStat == PlayerStat.MAX_ENERGY) { // check for overflow energy when updating max energy
+        } else if (stat == PlayerStat.MAX_ENERGY) { // check for overflow energy when updating max energy
             Stats stats = profileManager.getStats(player.getUniqueId());
             double currentEnergy = stats.getStatValue(PlayerStat.CURRENT_ENERGY);
             double maxEnergy = stats.getStatValue(PlayerStat.MAX_ENERGY);
