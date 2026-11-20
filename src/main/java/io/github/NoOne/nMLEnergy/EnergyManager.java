@@ -1,6 +1,6 @@
 package io.github.NoOne.nMLEnergy;
 
-import io.github.NoOne.nMLPlayerStats.profileSystem.ProfileManager;
+import io.github.NoOne.nMLPlayerStats.StatConfigManager;
 import io.github.NoOne.nMLPlayerStats.statSystem.PlayerStat;
 import io.github.NoOne.nMLPlayerStats.statSystem.StatChangeEvent;
 import org.bukkit.Bukkit;
@@ -12,7 +12,7 @@ import java.util.*;
 
 public class EnergyManager {
     private static NMLEnergy nmlEnergy = NMLEnergy.getInstance();
-    private static ProfileManager profileManager = nmlEnergy.getProfileManager();
+    private static StatConfigManager statConfigManager = nmlEnergy.getStatConfigManager();
     private static ArrayList<UUID> ongoingEnergyPauses = new ArrayList<>(); // players that have their energy regen paused
 
     public static void startEnergyRegenTask() {
@@ -26,8 +26,8 @@ public class EnergyManager {
                     }
 
                     UUID uuid = player.getUniqueId();
-                    double currentEnergy = profileManager.getStats(uuid).getStatValue(PlayerStat.CURRENT_ENERGY);
-                    double maxEnergy = profileManager.getStats(uuid).getStatValue(PlayerStat.MAX_ENERGY);
+                    double currentEnergy = statConfigManager.getStats(uuid).getStatValue(PlayerStat.CURRENT_ENERGY);
+                    double maxEnergy = statConfigManager.getStats(uuid).getStatValue(PlayerStat.MAX_ENERGY);
 
                     if (currentEnergy < maxEnergy) {
                         addEnergy(player, (maxEnergy / 15)); // how long in seconds it takes to regen to full energy
@@ -56,8 +56,8 @@ public class EnergyManager {
     }
 
     public static void updateEnergyBar(Player player) {
-        double currentEnergy = profileManager.getStats(player.getUniqueId()).getStatValue(PlayerStat.CURRENT_ENERGY);
-        double maxEnergy = profileManager.getStats(player.getUniqueId()).getStatValue(PlayerStat.MAX_ENERGY);
+        double currentEnergy = statConfigManager.getStats(player.getUniqueId()).getStatValue(PlayerStat.CURRENT_ENERGY);
+        double maxEnergy = statConfigManager.getStats(player.getUniqueId()).getStatValue(PlayerStat.MAX_ENERGY);
         double percent = currentEnergy / maxEnergy;
         int foodLevel = (int) Math.ceil(percent * 20);
 

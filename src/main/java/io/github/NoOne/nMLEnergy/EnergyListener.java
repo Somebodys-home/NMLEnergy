@@ -1,6 +1,6 @@
 package io.github.NoOne.nMLEnergy;
 
-import io.github.NoOne.nMLPlayerStats.profileSystem.ProfileManager;
+import io.github.NoOne.nMLPlayerStats.StatConfigManager;
 import io.github.NoOne.nMLPlayerStats.statSystem.PlayerStat;
 import io.github.NoOne.nMLPlayerStats.statSystem.ResetStatsEvent;
 import io.github.NoOne.nMLPlayerStats.statSystem.StatChangeEvent;
@@ -14,10 +14,10 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class EnergyListener implements Listener {
-    private ProfileManager profileManager;
+    private StatConfigManager statConfigManager;
 
     public EnergyListener(NMLEnergy nmlEnergy) {
-        this.profileManager = nmlEnergy.getProfileManager();
+        this.statConfigManager = nmlEnergy.getStatConfigManager();
     }
 
     @EventHandler (priority = EventPriority.MONITOR) // since this is the thing that updates the stat internally, it should be on monitor
@@ -28,7 +28,7 @@ public class EnergyListener implements Listener {
         if (stat == PlayerStat.CURRENT_ENERGY) { // update the hunger bar when updating current energy
             EnergyManager.updateEnergyBar(player);
         } else if (stat == PlayerStat.MAX_ENERGY) { // check for overflow energy when updating max energy
-            Stats stats = profileManager.getStats(player.getUniqueId());
+            Stats stats = statConfigManager.getStats(player.getUniqueId());
             double currentEnergy = stats.getStatValue(PlayerStat.CURRENT_ENERGY);
             double maxEnergy = stats.getStatValue(PlayerStat.MAX_ENERGY);
 
@@ -46,7 +46,7 @@ public class EnergyListener implements Listener {
             return;
         }
 
-        Stats stats = profileManager.getStats(player.getUniqueId());
+        Stats stats = statConfigManager.getStats(player.getUniqueId());
         int foodLevelChange = event.getFoodLevel() - player.getFoodLevel();
         double energyChange = foodLevelChange * (stats.getStatValue(PlayerStat.MAX_ENERGY) / 20);
 
@@ -56,7 +56,7 @@ public class EnergyListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        Stats stats = profileManager.getStats(player.getUniqueId());
+        Stats stats = statConfigManager.getStats(player.getUniqueId());
 
         if (player.isSprinting()) {
             EnergyManager.useEnergy(player, stats.getStatValue(PlayerStat.MAX_ENERGY) / 600);
